@@ -1,0 +1,15 @@
+package com.android.fuelmeup.model;
+
+import okhttp3.ResponseBody;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import rx.Observable;
+
+/**
+ * Created by Vishal on 25-11-2017.
+ */
+
+public interface DieselPriceService {
+    @GET("/{code}/Diesel-price-in-Bengaluru")
+    Observable<ResponseBody> getFuelPrice(@Path("code") String code);
+}

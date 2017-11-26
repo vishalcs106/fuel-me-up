@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.android.fuelmeup.view.FuelPriceFragment">
+
+    <RelativeLayout
+        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/headingTextView"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/petrolPriceTextView"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:layout_below="@id/headingTextView"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dieselPriceTextView"
+        android:layout_centerHorizontal="true"
+        android:textSize="24sp"
+        android:layout_below="@id/petrolPriceTextView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/placeTextView"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/dieselPriceTextView"/>
+    </RelativeLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:layout_margin="10dp"
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"/>
+
+
+
+</LinearLayout>
