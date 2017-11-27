@@ -1,6 +1,10 @@
 package com.android.fuelmeup.view;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
@@ -19,9 +23,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         context = this;
         checkLocationPermission();
@@ -31,9 +32,37 @@ public class SplashActivity extends AppCompatActivity {
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.
                 ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] { android.Manifest.permission.
-                            ACCESS_COARSE_LOCATION },
-                    PERMISSION_ACCESS_COARSE_LOCATION);
+            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context,
+                    Manifest.permission.READ_CONTACTS)) {
+                new AlertDialog.Builder(context)
+                        .setTitle("Permission required")
+                        .setMessage("Please grant location services and enable GPS!")
+                        .setPositiveButton("Allow", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActivityCompat.requestPermissions((Activity) context,
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        PERMISSION_ACCESS_COARSE_LOCATION);
+
+
+                            }
+
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                finish();
+                            }
+                        })
+                        .show();
+
+
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.
+                                ACCESS_COARSE_LOCATION},
+                        PERMISSION_ACCESS_COARSE_LOCATION);
+            }
         } else {
             startMainActivity();
 

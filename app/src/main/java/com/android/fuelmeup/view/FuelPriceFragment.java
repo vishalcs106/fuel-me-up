@@ -88,7 +88,9 @@ public class FuelPriceFragment extends Fragment implements FuelPriceViewInterfac
     @Override
     public void onViewCreated(View view, Bundle savedInstance){
         FuelPricePresenter presenter = new FuelPricePresenter(FuelPriceFragment.this);
-        presenter.getNearestCity(((MainFragment)getParentFragment()).location, getContext());
+        if(((MainFragment)getParentFragment()).location != null)
+            presenter.getNearestCity(((MainFragment)getParentFragment()).location, getContext());
+
     }
 
     @Override

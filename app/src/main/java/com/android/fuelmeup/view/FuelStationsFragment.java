@@ -87,10 +87,10 @@ public class FuelStationsFragment extends Fragment  implements OnMapReadyCallbac
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLatLng));
             mMap.animateCamera(CameraUpdateFactory.zoomIn());
             mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
+            getNearbyGasStations();
         } else {
             Toast.makeText(mContext, "Could not locate you", Toast.LENGTH_LONG).show();
         }
-        getNearbyGasStations();
     }
 
     private void getNearbyGasStations() {

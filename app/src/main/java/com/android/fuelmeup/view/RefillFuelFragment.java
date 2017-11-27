@@ -65,7 +65,8 @@ public class RefillFuelFragment extends Fragment implements RefillFuelViewInterf
         submitButton = view.findViewById(R.id.submitButton);
         fuelTypeRadio = view.findViewById(R.id.fuelTypeRadioGroup);
         final LatLng latLng = ((MainFragment)getParentFragment()).currentLatLng;
-        presenter.getFuelStationName(latLng.latitude, latLng.longitude);
+        if(latLng != null)
+            presenter.getFuelStationName(latLng.latitude, latLng.longitude);
         fuelTypeRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
