@@ -43,10 +43,7 @@ public class SplashActivity extends AppCompatActivity {
                                 ActivityCompat.requestPermissions((Activity) context,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         PERMISSION_ACCESS_COARSE_LOCATION);
-
-
                             }
-
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
@@ -56,8 +53,6 @@ public class SplashActivity extends AppCompatActivity {
                             }
                         })
                         .show();
-
-
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.
                                 ACCESS_COARSE_LOCATION},

@@ -13,7 +13,7 @@ import rx.subscriptions.CompositeSubscription;
 
 public class BasePresenter implements Presenter{
     private CompositeSubscription mCompositeSubscription;
-    private CompositeSubscription configureSubscription() {
+    public CompositeSubscription configureSubscription() {
         if (mCompositeSubscription == null || mCompositeSubscription.isUnsubscribed()) {
             mCompositeSubscription = new CompositeSubscription();
         }

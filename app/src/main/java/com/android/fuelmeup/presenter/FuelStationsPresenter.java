@@ -58,6 +58,10 @@ public class FuelStationsPresenter extends BasePresenter implements Observer<Jso
 
     public void getLocations(String url){
         unSubscribeAll();
-        subscribe( apiService.getGasStations(url), this);
+        Subscription subscription = apiService.getGasStations(url)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this);
+        configureSubscription().add(subscription);
     }
 }
