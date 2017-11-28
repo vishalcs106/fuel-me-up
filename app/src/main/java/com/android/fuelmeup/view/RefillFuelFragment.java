@@ -116,6 +116,8 @@ public class RefillFuelFragment extends Fragment implements RefillFuelViewInterf
     @Override
     public void onSaveSuccess() {
         Toast.makeText(getContext(), "You have Earned the cashback", Toast.LENGTH_LONG).show();
+        amountEditText.setText("");
+        volumeEditText.setText("");
     }
 
     @Override

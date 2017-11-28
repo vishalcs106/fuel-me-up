@@ -8,23 +8,23 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import org.json.JSONObject;
+
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import retrofit2.Retrofit;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+
 /**
  * Created by Vishal on 21-11-2017.
  */
 
-public class FuelStationsPresenter extends BasePresenter implements Observer<JsonObject>{
+public class FuelStationsPresenter extends BasePresenter implements Observer<JsonObject> {
     @Inject
     FuelStationsService apiService;
     @Inject Gson gson;
@@ -34,15 +34,18 @@ public class FuelStationsPresenter extends BasePresenter implements Observer<Jso
         DaggerInjector.getApiComponent().inject(this);
     }
 
+
     @Override
     public void onCompleted() {
-        viewInterface.onFuelStationsComplete();
+
     }
 
     @Override
     public void onError(Throwable e) {
         viewInterface.onFuelStationsError(e.getMessage());
     }
+
+
 
     @Override
     public void onNext(JsonObject jsonObject) {

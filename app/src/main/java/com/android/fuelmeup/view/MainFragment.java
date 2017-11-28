@@ -175,5 +175,4 @@ public class MainFragment extends Fragment implements LocationListener{
         }
         return location;
     }
-
 }

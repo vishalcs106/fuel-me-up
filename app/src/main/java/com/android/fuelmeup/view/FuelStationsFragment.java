@@ -24,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
@@ -82,11 +83,11 @@ public class FuelStationsFragment extends Fragment  implements OnMapReadyCallbac
         location = ((MainFragment)getParentFragment()).location;
         if(location != null) {
             currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(
+                    currentLatLng).zoom(15).build();
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             mMap.addMarker(new MarkerOptions().position(currentLatLng).icon(BitmapDescriptorFactory
                     .fromResource(R.drawable.current_location_map_pointer_small)));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLatLng));
-            mMap.animateCamera(CameraUpdateFactory.zoomIn());
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
             getNearbyGasStations();
         } else {
             Toast.makeText(mContext, "Could not locate you", Toast.LENGTH_LONG).show();

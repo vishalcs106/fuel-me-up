@@ -12,13 +12,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.android.fuelmeup.BuildConfig;
 import com.android.fuelmeup.R;
 
 public class SplashActivity extends AppCompatActivity {
-    private static final int PERMISSION_ACCESS_COARSE_LOCATION = 101;
+    private static final int PERMISSION_ACCESS_FINE_LOCATION = 101;
     Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +30,10 @@ public class SplashActivity extends AppCompatActivity {
 
     private void checkLocationPermission() {
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.
-                ACCESS_COARSE_LOCATION)
+                ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context,
-                    Manifest.permission.READ_CONTACTS)) {
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
                 new AlertDialog.Builder(context)
                         .setTitle("Permission required")
                         .setMessage("Please grant location services and enable GPS!")
@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 ActivityCompat.requestPermissions((Activity) context,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        PERMISSION_ACCESS_COARSE_LOCATION);
+                                        PERMISSION_ACCESS_FINE_LOCATION);
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -55,8 +55,8 @@ public class SplashActivity extends AppCompatActivity {
                         .show();
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.
-                                ACCESS_COARSE_LOCATION},
-                        PERMISSION_ACCESS_COARSE_LOCATION);
+                                ACCESS_FINE_LOCATION},
+                        PERMISSION_ACCESS_FINE_LOCATION);
             }
         } else {
             startMainActivity();
@@ -66,7 +66,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
-        if(requestCode == PERMISSION_ACCESS_COARSE_LOCATION){
+        if(requestCode == PERMISSION_ACCESS_FINE_LOCATION){
             if(grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 startMainActivity();
@@ -81,6 +81,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         }, 2000);
     }

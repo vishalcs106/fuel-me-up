@@ -13,7 +13,6 @@ import com.android.fuelmeup.model.DieselPriceService;
 import com.android.fuelmeup.model.FuelPrice;
 import com.android.fuelmeup.model.PetrolPriceService;
 import com.android.fuelmeup.model.FuelStation;
-import com.android.fuelmeup.utils.LocationUtils;
 import com.android.fuelmeup.view.FuelPriceViewInterface;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -167,7 +166,7 @@ public class FuelPricePresenter extends BasePresenter {
         return nearestCity;
     }
 
-    public String getLocationName(double latitude, double longitude){
+    private String getLocationName(double latitude, double longitude){
         String cityName = "Not Found";
         Geocoder gcd = new Geocoder(mContext, Locale.getDefault());
         try {

@@ -1,11 +1,13 @@
 package com.android.fuelmeup.presenter;
 
+
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
+
 
 /**
  * Created by Vishal on 21-11-2017.
