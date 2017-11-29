@@ -29,11 +29,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/amountEditText"
             android:padding="10dp"
+            android:inputType="number"
             android:hint="Enter the amount"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/fuelVolumeEditText"
+            android:inputType="number"
             android:padding="10dp"
             android:hint="Enter fuel refilled in liters"/>
         <EditText

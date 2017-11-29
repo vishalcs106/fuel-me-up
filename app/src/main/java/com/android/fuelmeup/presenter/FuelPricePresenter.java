@@ -98,7 +98,7 @@ public class FuelPricePresenter{
                             String str = responseBody.string();
                             FuelPrice fuelPrice = fuelPriceFromHtml(str, FuelPrice.TYPE_DIESEL,
                                     nearestCity.cityName, nearestCity.code);
-                            viewInterface.onPetrolPriceSuccess(fuelPrice);
+                            viewInterface.onDieselPriceSuccess(fuelPrice);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
