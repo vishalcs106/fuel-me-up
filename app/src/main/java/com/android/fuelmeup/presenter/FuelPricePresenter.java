@@ -15,6 +15,7 @@ import com.android.fuelmeup.model.PetrolPriceService;
 import com.android.fuelmeup.model.FuelStation;
 import com.android.fuelmeup.view.FuelPriceViewInterface;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.JsonObject;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,23 +29,27 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
 
 /**
  * Created by Vishal on 25-11-2017.
  */
 
-public class FuelPricePresenter extends BasePresenter {
+public class FuelPricePresenter{
     private Context mContext;
     @Inject
     PetrolPriceService petrolPriceService;
     @Inject
     DieselPriceService dieselPriceService;
     private FuelPriceViewInterface viewInterface;
+    CompositeDisposable disposable = new CompositeDisposable();
     public FuelPricePresenter(FuelPriceViewInterface viewInterface){
         this.viewInterface = viewInterface;
     }
@@ -61,20 +66,8 @@ public class FuelPricePresenter extends BasePresenter {
     }
 
     private void getFuelPrices(final CityCode nearestCity) {
-        Observable<ResponseBody> petrolRequest = petrolPriceService.getFuelPrice(nearestCity.code);
-        petrolRequest.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
+        disposable.add(petrolPriceService.getFuelPrice(nearestCity.code).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<ResponseBody>() {
                     @Override
                     public void onNext(ResponseBody responseBody) {
                         try {
@@ -85,16 +78,6 @@ public class FuelPricePresenter extends BasePresenter {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
-                    }
-                });
-        Observable<ResponseBody> dieselRequest = dieselPriceService.getFuelPrice(nearestCity.code);
-        dieselRequest.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseBody>() {
-                    @Override
-                    public void onCompleted() {
-
                     }
 
                     @Override
@@ -103,18 +86,35 @@ public class FuelPricePresenter extends BasePresenter {
                     }
 
                     @Override
+                    public void onComplete() {
+
+                    }
+                }));
+        disposable.add(dieselPriceService.getFuelPrice(nearestCity.code).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<ResponseBody>() {
+                    @Override
                     public void onNext(ResponseBody responseBody) {
                         try {
                             String str = responseBody.string();
                             FuelPrice fuelPrice = fuelPriceFromHtml(str, FuelPrice.TYPE_DIESEL,
                                     nearestCity.cityName, nearestCity.code);
-                            viewInterface.onDieselPriceSuccess(fuelPrice);
+                            viewInterface.onPetrolPriceSuccess(fuelPrice);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
 
                     }
-                });
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+
     }
 
     private FuelPrice fuelPriceFromHtml(String str, String fuelType, String cityName, String cityCode) {

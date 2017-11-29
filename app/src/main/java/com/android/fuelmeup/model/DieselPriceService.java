@@ -1,9 +1,10 @@
 package com.android.fuelmeup.model;
 
+import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import rx.Observable;
+
 
 /**
  * Created by Vishal on 25-11-2017.

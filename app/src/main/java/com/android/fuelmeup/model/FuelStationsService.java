@@ -3,9 +3,10 @@ package com.android.fuelmeup.model;
 import com.google.gson.JsonObject;
 
 
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Url;
-import rx.Observable;
+
 
 
 /**

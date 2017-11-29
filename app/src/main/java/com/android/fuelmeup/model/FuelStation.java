@@ -9,19 +9,42 @@ import android.location.Location;
 import java.util.List;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class FuelStation {
-
+    @SerializedName("geometry")
+    @Expose
     private Geometry geometry;
+    @SerializedName("icon")
+    @Expose
     private String icon;
+    @SerializedName("id")
+    @Expose
     private String id;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("photos")
+    @Expose
     private List<Photo> photos = null;
+    @SerializedName("place_id")
+    @Expose
     private String placeId;
+    @SerializedName("rating")
+    @Expose
     private Double rating;
+    @SerializedName("reference")
+    @Expose
     private String reference;
+    @SerializedName("scope")
+    @Expose
     private String scope;
+    @SerializedName("types")
+    @Expose
     private List<String> types = null;
+    @SerializedName("vicinity")
+    @Expose
     private String vicinity;
     public String distance;
     public Geometry getGeometry() {
@@ -117,8 +140,11 @@ public class FuelStation {
     }
 
     public class Geometry {
-
+        @SerializedName("location")
+        @Expose
         private StationLocation location;
+        @SerializedName("viewport")
+        @Expose
         private Viewport viewport;
 
         public StationLocation getLocation() {
@@ -140,7 +166,12 @@ public class FuelStation {
 
     public class StationLocation {
 
+        @SerializedName("lat")
+        @Expose
         private Double lat;
+
+        @SerializedName("lng")
+        @Expose
         private Double lng;
 
         public Double getLat() {
@@ -172,7 +203,12 @@ public class FuelStation {
 
     private class Northeast {
 
+        @SerializedName("lat")
+        @Expose
         private Double lat;
+
+        @SerializedName("lng")
+        @Expose
         private Double lng;
 
         public Double getLat() {
@@ -195,7 +231,12 @@ public class FuelStation {
 
     private class Viewport {
 
+        @SerializedName("northeast")
+        @Expose
         private Northeast northeast;
+
+        @SerializedName("southwest")
+        @Expose
         private Southwest southwest;
 
         public Northeast getNortheast() {
@@ -218,7 +259,12 @@ public class FuelStation {
 
     private class Southwest {
 
+        @SerializedName("lat")
+        @Expose
         private Double lat;
+
+        @SerializedName("lng")
+        @Expose
         private Double lng;
 
         public Double getLat() {
@@ -240,10 +286,17 @@ public class FuelStation {
     }
 
     private class Photo {
-
+        @SerializedName("height")
+        @Expose
         private Integer height;
+        @SerializedName("html_attributions")
+        @Expose
         private List<String> htmlAttributions = null;
+        @SerializedName("photo_reference")
+        @Expose
         private String photoReference;
+        @SerializedName("width")
+        @Expose
         private Integer width;
 
         public Integer getHeight() {

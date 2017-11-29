@@ -17,7 +17,7 @@ import java.util.Locale;
  * Created by Vishal on 26-11-2017.
  */
 
-public class RefillFuelPresenter extends BasePresenter {
+public class RefillFuelPresenter{
     DaoSession daoSession;
     RefillFuelViewInterface viewInterface;
     Context mContext;

@@ -72,6 +72,7 @@
 -keep class butterknife.*
 -keepclasseswithmembernames class * { @butterknife.* <methods>; }
 -keepclasseswithmembernames class * { @butterknife.* <fields>; }
+-keep public class * implements butterknife.internal.ViewBinder { public <init>(); }
 
 -keep class com.github.mikephil.charting.** { *; }
 -keeppackagenames org.jsoup.nodes
@@ -88,8 +89,56 @@ public static java.lang.String TABLENAME;
 -dontwarn com.facebook.stetho.**
 -dontwarn okio.**
 
--keepclassmembers class com.android.fuelmeup.model {
+-keep class com.android.fuelmeup.model {
   *;
 }
 
+
+
 -dontwarn retrofit2.Platform$Java8
+
+-keep public class * extends android.app.AppCompatActivity
+-keep public class * extends android.support.v4.app.Fragment
+
+
+-keep public class * extends android.app.Application
+
+
+
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+-keepnames @com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+    @com.google.android.gms.common.annotation.KeepName *;
+}
+
+-dontwarn rx.**
+
+-keepattributes *Annotation*
+-keepattributes Signature
+-keepattributes EnclosingMethod
+-keep class sun.misc.Unsafe { *; }
+
+
+-keep class com.google.gson.stream.** { *; }
+
+-keep public class com.google.gson.**
+-keep public class com.google.gson.** {public private protected *;}
+-keepattributes *Annotation*,Signature
+-keep class com.mypackage.ActivityMonitor.ClassMultiPoints.** { *; }
+-keep public class com.mypackage.ActivityMonitor$ClassMultiPoints     { public protected *; }
+-keep public class com.mypackage.ActivityMonitor$ClassMultiPoints$ClassPoints { public protected *; }
+-keep public class com.mypackage.ActivityMonitor$ClassMultiPoints$ClassPoints$ClassPoint { public protected *; }
+
+-keepclassmembers public class com.android.fuelmeup.model.FuelStation { private <fields>; }
+-keepclassmembers public class com.android.fuelmeup.model.FuelStation { private <methods>; }
+-keepclassmembers public class com.android.fuelmeup.model.FuelStation { public <fields>; }
+-keepclassmembers public class com.android.fuelmeup.model.FuelStation { public <methods>; }
+
+-keepclassmembers enum * { *; }
+
+-printmapping mapping.txt
+
+-keep class rx.internal.util.unsafe.**
